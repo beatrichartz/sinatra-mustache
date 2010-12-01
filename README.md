@@ -22,11 +22,11 @@ Usage
 
 Try this on:
 
-  require 'sinatra/mustache'
+    require 'sinatra/mustache'
 
-  class App < Sinatra::Base
-    set :views, 'templates' # totally optional
-  end
+    class App < Sinatra::Base
+      set :views, 'templates' # totally optional
+    end
 
 And then put your .mustache files in your app's views folder
 

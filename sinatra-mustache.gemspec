@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Jason Campbell']
   s.email       = ['jason@greatergood.cc']
   s.homepage    = 'http://github.com/jxson/sinatra-mustache'
-  s.summary     = %q{Add to your sinatra app to use mustache without separate ruby views}
-  s.description = %q{Add to your sinatra app to use mustache without separate ruby views}
+  s.summary     = %q{Use Mustache in your Sinatra app without the extra view classes}
+  s.description = %q{Use Mustache in your Sinatra app without the extra view classes}
 
   s.rubyforge_project = "sinatra-mustache"
 

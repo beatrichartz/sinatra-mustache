@@ -22,4 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra', '~> 1.1.0'
   s.add_dependency 'mustache', '~> 0.11.2'
   s.add_dependency 'tilt', '1.1'
+
+  s.add_development_dependency 'rspec', '~> 2.2.0'
+  s.add_development_dependency 'rack-test', '~> 0.5.6'
 end

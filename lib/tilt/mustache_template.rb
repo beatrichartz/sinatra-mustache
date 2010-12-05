@@ -10,7 +10,7 @@ module Tilt
     end
 
     def prepare
-      ::Mustache.template_path = file.gsub(File.basename(file), '')
+      ::Mustache.template_path = file.gsub(File.basename(file), '') if file
       @engine = ::Mustache.new
       @output = nil
     end
@@ -30,7 +30,11 @@ module Tilt
       end
 
       scope.instance_variables.each do |instance_variable|
-        locals[instance_variable.to_s.gsub('@','').to_sym] = scope.instance_variable_get(instance_variable)
+        symbol = instance_variable.to_s.gsub('@','').to_sym
+
+        if ! locals[symbol]
+          locals[symbol] = scope.instance_variable_get(instance_variable)
+        end
       end
 
       locals[:yield] = block.nil? ? '' : yield

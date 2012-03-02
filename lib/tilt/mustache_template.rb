@@ -20,7 +20,7 @@ module Tilt
         yaml = $2.strip
         template = data.sub($1, '')
 
-        YAML.each_document(yaml) do |front_matter|
+        YAML.load_documents(yaml) do |front_matter|
           # allows partials to override locals defined higher up
           front_matter.delete_if { |key,value| locals.has_key?(key)}
           locals.merge!(front_matter)

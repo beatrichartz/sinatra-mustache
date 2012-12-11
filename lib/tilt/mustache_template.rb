@@ -40,7 +40,7 @@ module Tilt
       locals[:yield] = block.nil? ? '' : yield
       locals[:content] = locals[:yield]
 
-      @output ||= ::Mustache.render(template, locals)
+      @output = ::Mustache.render(template, locals)
     end
   end
   register 'mustache', MustacheTemplate

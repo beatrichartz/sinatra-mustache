@@ -57,6 +57,31 @@ describe Tilt::MustacheTemplate do
         subject.should == 'Beer is great but Whisky is greater.'
       end
     end
+    
+    context "when locals are changing for the same template" do
+      let(:template) {
+        Tilt::MustacheTemplate.new {
+          'Beer is {{ beer }} but Whisky is {{ whisky }}.'
+        }
+      }
+      before(:all) do
+        @template = template
+      end
+      context "first time rendering" do
+        let(:first_locals) { { :beer => 'great', :whisky => 'greater' } }
+        subject { @template.render(nil, first_locals) }
+        it 'should render fine' do
+          subject.should == 'Beer is great but Whisky is greater.'
+        end
+      end
+      context "second time rendering with changed locals" do
+        let(:second_locals) { { :beer => 'nice', :whisky => 'the best' } }
+        subject { @template.render(nil, second_locals) }
+        it 'should render fine' do
+          subject.should == 'Beer is nice but Whisky is the best.'
+        end
+      end
+    end
 
     context 'passing a block' do
       let(:template) { Tilt::MustacheTemplate.new { |t| 'Hello {{ yield }}!'} }

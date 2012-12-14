@@ -16,14 +16,16 @@ module Tilt
     end
 
     def evaluate(scope, locals, &block)
+      mustache_locals = locals.dup
+      
       if data =~ /^(\s*---(.+)---\s*)/m
         yaml = $2.strip
         template = data.sub($1, '')
 
         YAML.load_documents(yaml) do |front_matter|
           # allows partials to override locals defined higher up
-          front_matter.delete_if { |key,value| locals.has_key?(key)}
-          locals.merge!(front_matter)
+          front_matter.delete_if { |key,value| mustache_locals.has_key?(key)}
+          mustache_locals.merge!(front_matter)
         end
       else
         template = data
@@ -32,15 +34,15 @@ module Tilt
       scope.instance_variables.each do |instance_variable|
         symbol = instance_variable.to_s.gsub('@','').to_sym
 
-        if ! locals[symbol]
-          locals[symbol] = scope.instance_variable_get(instance_variable)
+        unless mustache_locals.member?(symbol)
+          mustache_locals[symbol] = scope.instance_variable_get(instance_variable)
         end
       end
 
-      locals[:yield] = block.nil? ? '' : yield
-      locals[:content] = locals[:yield]
+      mustache_locals[:yield] = block.nil? ? '' : yield
+      mustache_locals[:content] = mustache_locals[:yield]
 
-      @output = ::Mustache.render(template, locals)
+      @output = ::Mustache.render(template, mustache_locals)
     end
   end
   register 'mustache', MustacheTemplate

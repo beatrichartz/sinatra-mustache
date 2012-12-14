@@ -56,6 +56,31 @@ describe Tilt::MustacheTemplate do
       it 'locals should have precedence' do
         subject.should == 'Beer is great but Whisky is greater.'
       end
+      context "with locals evaluating to false" do
+        let(:locals) { { :beer => 'great', :whisky => nil } }
+        it 'locals should still have precedence' do
+          subject.should == 'Beer is great but Whisky is .'
+        end
+      end
+    end
+    
+    context "data" do
+      let(:template) do
+        Tilt::MustacheTemplate.new {
+          '{{#beers }}{{ preference }} beer is {{ beer }}. {{/beers }} {{#whiskies }}{{ preference }} Whisky is {{ whisky }}. {{/whiskies }}'
+        }
+      end
+      let!(:data) { {:beers => [{:preference => "The best", :beer => "Gulp"}, {:preference => "The second best", :beer => "German Schluck"}],
+                    :whiskies => [{:preference => "The worst", :whisky => "Rotten Brew"}, {:preference => "The best", :whisky => "Barley Pure"}]} }
+      let(:scope) do
+        scope = Object.new
+        scope
+      end
+      subject { template.render(scope, data) }
+      it "should not be modified through rendering" do
+        subject.should == "The best beer is Gulp. The second best beer is German Schluck.  The worst Whisky is Rotten Brew. The best Whisky is Barley Pure. "
+        data.keys.should == [:beers, :whiskies]
+      end
     end
     
     context "when locals are changing for the same template" do

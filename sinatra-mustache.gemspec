@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'mustache', '~> 0.99'
   s.add_dependency 'tilt', '~> 1.2', '~> 1.3'
 
-  s.add_development_dependency 'rspec', '~> 2.8'
-  s.add_development_dependency 'rack-test', '~> 0.6'
+  s.add_development_dependency 'rspec', '~> 2'
+  s.add_development_dependency 'rack-test', '~> 0'
 end

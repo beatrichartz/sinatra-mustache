@@ -4,6 +4,7 @@ require 'yaml'
 
 module Tilt
   class MustacheTemplate < Template
+    
     def initialize_engine
       return if defined? ::Mustache
       require_template_library 'mustache'
@@ -45,5 +46,6 @@ module Tilt
       @output = ::Mustache.render(template, mustache_locals)
     end
   end
+  
   register 'mustache', MustacheTemplate
 end

@@ -2,6 +2,26 @@ require 'spec_helper'
 
 describe 'sinatra-mustache', :type => :request do
   subject { response }
+  
+  context 'with an inline layout and template caching' do
+    before(:each) do
+      @app = mock_app {
+        disable :reload_templates
+        layout { 'Hello from {{ yield }}!' }
+        get('/foo') { mustache 'foo' }
+        get('/bar') { mustache 'bar' }
+      }
+    end
+
+    describe "two requests" do
+      it "does not cache wrong" do
+        get '/foo'
+        response.body.should == 'Hello from foo!'
+        get '/bar'
+        response.body.should == 'Hello from bar!'
+      end
+    end
+  end
 
   context 'inline mustache strings' do
     context 'without the :locals option' do

@@ -79,7 +79,7 @@ describe Tilt::MustacheTemplate do
       subject { template.render(scope, data) }
       it "should not be modified through rendering" do
         subject.should == "The best beer is Gulp. The second best beer is German Schluck.  The worst Whisky is Rotten Brew. The best Whisky is Barley Pure. "
-        data.keys.should == [:beers, :whiskies]
+        data.keys.sort.should == [:beers, :whiskies]
       end
     end
     

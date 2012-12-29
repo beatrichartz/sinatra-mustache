@@ -1,4 +1,4 @@
-sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache)
+sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache)[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/beatrichartz/sinatra-mustache)
 ================
 
 To simplify setting up [Sinatra][1] to use [Mustache][2] for it's templates

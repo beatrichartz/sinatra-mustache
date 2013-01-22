@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.name        = "sinatra-mustache"
   s.version     = Sinatra::Mustache::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Jason Campbell']
-  s.email       = ['jason@greatergood.cc']
-  s.homepage    = 'http://github.com/jxson/sinatra-mustache'
+  s.authors     = ['Jason Campbell', 'Beat Richartz']
+  s.email       = ['attraccessor@gmail.com']
+  s.homepage    = 'http://github.com/beatrichartz/sinatra-mustache'
   s.summary     = %q{Use Mustache in your Sinatra app without the extra view classes}
   s.description = %q{Use Mustache in your Sinatra app without the extra view classes}
 

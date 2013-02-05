@@ -35,6 +35,20 @@ describe Tilt::MustacheTemplate do
       it { should == 'Hello World!' }
     end
 
+    context 'with sintatra helpers' do
+      let(:scope) do
+        scope = Object.new
+        def scope.name
+          "Moto"
+        end
+        scope
+      end
+      
+      subject { template.render(scope) }
+
+      it { should == 'Hello Moto!' }
+    end
+
     context 'with both an object and locals' do
       let(:template) do
         Tilt::MustacheTemplate.new {

@@ -6,11 +6,7 @@ class Currystache
     @proc     = meth.to_proc
     @args     = []
     
-    if proc.arity > 0
-      @curried = proc.curry
-    elsif proc.arity == -1
-      @proxied = true
-    end
+    @proxied  = proc.arity != 0
   end
   
   def has_key?(key)
@@ -18,7 +14,7 @@ class Currystache
   end
   
   def [] arg
-    if curried? || proxied?
+    if proxied?
       args << arg
       self
     else
@@ -27,7 +23,7 @@ class Currystache
   end
   
   def to_s
-    if curried? || proxied?
+    if proxied?
       proc.call(*args)
     else
       proc.call
@@ -35,10 +31,6 @@ class Currystache
   end
   
   private
-  
-    def curried?
-      !!@curried
-    end
     
     def proxied?
       @proxied == true

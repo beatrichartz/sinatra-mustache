@@ -1,12 +1,10 @@
 class Currystache
   
-  attr_reader :curried, :proc, :args
+  attr_reader :proc, :args
   
   def initialize meth
     @proc     = meth.to_proc
     @args     = []
-    
-    @proxied  = proc.arity != 0
   end
   
   def has_key?(key)
@@ -14,26 +12,12 @@ class Currystache
   end
   
   def [] arg
-    if proxied?
-      args << arg
-      self
-    else
-      proc.call
-    end
+    args << arg
+    self
   end
   
   def to_s
-    if proxied?
-      proc.call(*args)
-    else
-      proc.call
-    end
+    proc.call(*args)
   end
-  
-  private
-    
-    def proxied?
-      @proxied == true
-    end
     
 end

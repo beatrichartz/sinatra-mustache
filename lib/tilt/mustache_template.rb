@@ -44,10 +44,19 @@ module Tilt
       mustache_locals[:content] = mustache_locals[:yield]
 
       #iterate over all of scope's public methods to make helpers available in the view if the helper has no arguments
+      
       scope.public_methods.each do |method_name|
         method = scope.method(method_name)
-        mustache_locals[method_name] = method.to_proc if !mustache_locals.member?(method_name) && method.arity == 0  
+        if !mustache_locals.member?(method_name)
+          f = Currystache.new(method)
+          mustache_locals[method_name] = f
+        end
       end
+      # scope.public_methods.each do |method_name|
+      #   puts method_name.inspect
+      #   method = scope.method(method_name)
+      #   mustache_locals[method_name] = method.to_proc if !mustache_locals.member?(method_name)
+      # end
 
       @output = ::Mustache.render(template, mustache_locals)
     end

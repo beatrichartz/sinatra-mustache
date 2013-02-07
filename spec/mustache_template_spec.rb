@@ -35,18 +35,33 @@ describe Tilt::MustacheTemplate do
       it { should == 'Hello World!' }
     end
 
-    context 'with sintatra helpers' do
+    context 'methods of the scope' do
+      let(:template) do
+        Tilt::MustacheTemplate.new do |t| 
+          'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}'
+        end
+      end
+      
       let(:scope) do
         scope = Object.new
-        def scope.name
-          "Moto"
+        def scope.name first_name, last_name
+          [first_name, last_name].join ' '
+        end
+        def scope.friends *friends
+          friends.join ' & '
+        end
+        def scope.sour_drink type
+          "#{type} Sour"
+        end
+        def scope.random_drink
+          "Beer"
         end
         scope
       end
       
       subject { template.render(scope) }
 
-      it { should == 'Hello Moto!' }
+      it { should == "Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer" }
     end
 
     context 'with both an object and locals' do

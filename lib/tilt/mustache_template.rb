@@ -47,10 +47,7 @@ module Tilt
       
       scope.public_methods.each do |method_name|
         method = scope.method(method_name)
-        if !mustache_locals.member?(method_name)
-          f = Currystache.new(method)
-          mustache_locals[method_name] = f
-        end
+        mustache_locals[method_name] ||= Currystache.new(method)
       end
       # scope.public_methods.each do |method_name|
       #   puts method_name.inspect

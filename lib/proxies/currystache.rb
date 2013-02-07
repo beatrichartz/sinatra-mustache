@@ -7,7 +7,7 @@ class Currystache
     @args     = []
   end
   
-  def has_key?(key)
+  def has_key? key
     true
   end
   
@@ -17,7 +17,7 @@ class Currystache
   end
   
   def to_s
-    proc.call(*args)
+    proc.call *args
   end
     
 end

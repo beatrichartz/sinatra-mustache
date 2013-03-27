@@ -7,7 +7,7 @@ module Sinatra
         if arg.is_a? Symbol
           add_to_mustache_helper_methods(arg, instance_method(arg).bind(self.new!))
         elsif arg.is_a? Module
-          arg.instance_methods.each { |m| add_to_mustache_helper_methods(arg, m) }
+          arg.instance_methods.each { |m| add_to_mustache_helper_methods(m, arg.instance_method(m).bind(self.new!)) }
         else
           raise ArgumentError.new("#{arg.class} can not be used with mustache_helper, please provide a symbol or a Module")
         end

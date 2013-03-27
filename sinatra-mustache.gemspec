@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency 'sinatra', '~> 1.2', '~> 1.3', '~> 1.4'
+  s.add_dependency 'sinatra', '~> 1'
   s.add_dependency 'mustache', '~> 0.99'
   s.add_dependency 'tilt', '~> 1.2', '~> 1.3'
 

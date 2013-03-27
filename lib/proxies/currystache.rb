@@ -21,7 +21,7 @@ module Proxies
     def to_s
       result = proc.call(*args)
       args.clear
-      result
+      result.to_s
     end
     
     def inspect

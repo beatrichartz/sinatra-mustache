@@ -5,15 +5,19 @@ module Sinatra
     def mustache_helper *args      
       args.each do |arg|
         if arg.is_a? Symbol
-          METHODS[arg] = Proxies::Currystache.new(instance_method(arg).bind(self.new!))
+          add_to_methods(instance_method(arg).bind(self.new!))
         elsif arg.is_a? Module
-          arg.instance_methods.each { |m| METHODS[arg] = Proxies::Currystache.new(m) }
+          arg.instance_methods.each { |m| add_to_methods(m) }
         else
           raise ArgumentError.new("#{arg.class} can not be used with mustache_helper, please provide a symbol or a Module")
         end
       end
     end
     alias :mustache_helpers :mustache_helper
+    
+    def add_to_methods meth
+      METHODS[arg] = Proxies::Currystache.new(meth)
+    end
     
   end
   

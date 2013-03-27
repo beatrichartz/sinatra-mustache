@@ -22,6 +22,55 @@ describe 'sinatra-mustache', :type => :request do
       end
     end
   end
+  
+  context "with defined mustache template helpers" do
+    before(:each) do
+      @app = mock_helper_app {
+        layout { 'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}' }
+        helpers do
+          def name first_name, last_name
+            [first_name, last_name].join ' '
+          end
+          def friends *friends
+            friends.join ' & '
+          end
+          def sour_drink type
+            "#{type} Sour"
+          end
+          def random_drink
+            "Beer"
+          end
+        end
+        mustache_helpers :name, :friends, :sour_drink, :random_drink
+        get('/foo') { mustache 'foo' }
+      }
+    end
+    after(:each) do
+      clean_helper_app
+    end
+    it "should include them and make them usable" do
+      get '/foo'
+      response.body.should == "Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer"
+    end
+  end
+  
+  context "with a module of mustache template helpers" do
+    before(:each) do
+      @app = mock_helper_app {
+        layout { 'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}' }
+        helpers FakeTemplateHelper
+        mustache_helpers FakeTemplateHelper
+        get('/foo') { mustache 'foo' }
+      }
+    end
+    after(:each) do
+      clean_helper_app
+    end
+    it "should include them and make them usable" do
+      get '/foo'
+      response.body.should == "Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer"
+    end
+  end
 
   context 'inline mustache strings' do
     context 'without the :locals option' do

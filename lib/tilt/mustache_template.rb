@@ -16,7 +16,7 @@ module Tilt
       @output = nil
     end
 
-    def evaluate(scope, locals, &block)
+    def evaluate(scope, locals, &block)      
       mustache_locals = locals.dup
       
       if data =~ /^(\s*---(.+)---\s*)/m
@@ -39,22 +39,12 @@ module Tilt
           mustache_locals[symbol] = scope.instance_variable_get(instance_variable)
         end
       end
+            
+      mustache_locals = Sinatra::MustacheHelper::METHODS.dup.merge(mustache_locals)
 
-      mustache_locals[:yield] = block.nil? ? '' : yield
+      mustache_locals[:yield]   = block.nil? ? '' : yield
       mustache_locals[:content] = mustache_locals[:yield]
-
-      #iterate over all of scope's public methods to make helpers available in the view if the helper has no arguments
       
-      scope.public_methods.each do |method_name|
-        method = scope.method(method_name)
-        mustache_locals[method_name] ||= Currystache.new(method)
-      end
-      # scope.public_methods.each do |method_name|
-      #   puts method_name.inspect
-      #   method = scope.method(method_name)
-      #   mustache_locals[method_name] = method.to_proc if !mustache_locals.member?(method_name)
-      # end
-
       @output = ::Mustache.render(template, mustache_locals)
     end
   end

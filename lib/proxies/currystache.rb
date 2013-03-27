@@ -1,23 +1,32 @@
-class Currystache
+module Proxies
+  class Currystache
+
+    attr_reader :proc, :args
+
+    def initialize my_proc
+      @proc     = my_proc
+      @args     = []
+    end
   
-  attr_reader :proc, :args
+    def has_key? arg
+      true
+    end
+
+    def call arg
+      args << arg
+      self
+    end
+    alias :[] :call
   
-  def initialize meth
-    @proc     = meth.to_proc
-    @args     = []
-  end
-  
-  def has_key? key
-    true
-  end
-  
-  def [] arg
-    args << arg
-    self
-  end
-  
-  def to_s
-    proc.call *args
-  end
+    def to_s
+      result = proc.call(*args)
+      args.clear
+      result
+    end
     
+    def inspect
+      proc
+    end
+
+  end
 end

@@ -1,4 +1,5 @@
 require 'proxies/currystache'
+require 'sinatra/helpers/mustache'
 require 'tilt/mustache_template'
 
 module Sinatra

@@ -9,7 +9,7 @@ describe Tilt::MustacheTemplate do
   end
 
   describe '#render' do
-    let(:template) { Tilt::MustacheTemplate.new { |t| 'Hello {{ name }}!'} }
+    let(:template) { Tilt::MustacheTemplate.new { |t| 'Hello {{ someone }}!'} }
 
     context 'without locals or a scope' do
       subject { template.render }
@@ -18,7 +18,7 @@ describe Tilt::MustacheTemplate do
     end
 
     context 'with locals' do
-      subject { template.render(Object.new, :name => 'World') }
+      subject { template.render(Object.new, :someone => 'World') }
 
       it { should == 'Hello World!' }
     end
@@ -26,7 +26,7 @@ describe Tilt::MustacheTemplate do
     context 'with an objects scope' do
       let(:scope) do
         scope = Object.new
-        scope.instance_variable_set(:@name, 'World')
+        scope.instance_variable_set(:@someone, 'World')
         scope
       end
 

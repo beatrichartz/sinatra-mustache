@@ -26,6 +26,7 @@ describe 'sinatra-mustache', :type => :request do
   context "with defined mustache template helpers" do
     before(:each) do
       @app = mock_helper_app {
+        register Sinatra::MustacheHelper
         layout { 'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}' }
         helpers do
           def name first_name, last_name
@@ -57,6 +58,7 @@ describe 'sinatra-mustache', :type => :request do
   context "with a module of mustache template helpers" do
     before(:each) do
       @app = mock_helper_app {
+        register Sinatra::MustacheHelper
         layout { 'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}' }
         helpers FakeTemplateHelper
         mustache_helpers FakeTemplateHelper

@@ -14,7 +14,7 @@ Without extra view classes
 There is already an [official][3] way to get Mustache to work with Sinatra, which involves some work and requires separate view classes to accompany your mustache templates. There's power in that for sure, but for some implementations it is a bit complex.
 
 Usage
-=====
+----
 
 Try this on:
 
@@ -29,7 +29,7 @@ And then put your .mustache files in your app's views folder.
 Instance variables and locals are available to the template as well as YAML front matter.
 
 Helpers
-======
+----
 
 Use the helpers you defined in your app by passing their names to mustache_helper:
 
@@ -72,7 +72,7 @@ Now, this is possible:
 Passing arguments to helper methods via dot notation is limited to Strings only.
 
 Caveat
-======
+----
 
 If you need the extra support of the ruby views used in the official Mustache for Sinatra example this gem probably isn't for you.
 

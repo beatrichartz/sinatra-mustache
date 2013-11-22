@@ -1,4 +1,4 @@
-sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache) [![Code Climate](https://codeclimate.com/github/beatrichartz/sinatra-mustache.png)](https://codeclimate.com/github/beatrichartz/sinatra-mustache) {<img src="https://gemnasium.com/beatrichartz/sinatra-mustache.png" alt="Dependency Status" />}[https://gemnasium.com/beatrichartz/sinatra-mustache]
+sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache) [![Code Climate](https://codeclimate.com/github/beatrichartz/sinatra-mustache.png)](https://codeclimate.com/github/beatrichartz/sinatra-mustache) [![Dependency Status](https://gemnasium.com/beatrichartz/sinatra-mustache.png)](https://gemnasium.com/beatrichartz/sinatra-mustache)
 ================
 
 To simplify setting up [Sinatra][1] to use [Mustache][2] for it's templates

@@ -2,7 +2,7 @@ module Sinatra
   module MustacheHelper
     METHODS = {}
     
-    def mustache_helper *args      
+    def mustache_helper *args
       args.each do |arg|
         if arg.is_a? Symbol
           add_to_mustache_helper_methods(arg, instance_method(arg).bind(self.new!))

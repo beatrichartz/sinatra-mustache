@@ -37,7 +37,7 @@ describe Tilt::MustacheTemplate do
 
     context 'methods of the scope' do
       let(:template) do
-        Tilt::MustacheTemplate.new do |t| 
+        Tilt::MustacheTemplate.new do |t|
           'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}'
         end
       end

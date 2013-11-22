@@ -1,3 +1,9 @@
+0.2.0
+=====
+
+- removed support for 1.8.7
+- refactoring of mustache template class
+
 0.0.5
 =====
 

@@ -9,7 +9,7 @@ about it you should take some time to [get to know it][4].
 [Mustache][2] is a really great and simple templating system.
 
 Without extra view classes
-====
+----
 
 There is already an [official][3] way to get Mustache to work with Sinatra, which involves some work and requires separate view classes to accompany your mustache templates. There's power in that for sure, but for some implementations it is a bit complex.
 

@@ -1,21 +1,17 @@
-sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/beatrichartz/sinatra-mustache)
+sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache) [![Code Climate](https://codeclimate.com/github/beatrichartz/sinatra-mustache.png)](https://codeclimate.com/github/beatrichartz/sinatra-mustache) {<img src="https://gemnasium.com/beatrichartz/sinatra-mustache.png" alt="Dependency Status" />}[https://gemnasium.com/beatrichartz/sinatra-mustache]
 ================
 
 To simplify setting up [Sinatra][1] to use [Mustache][2] for it's templates
 
-[Sinatra][1] is a pretty amazing little web framework, if you don't know much
+[Sinatra][1] is a amazing little web framework, if you don't know much
 about it you should take some time to [get to know it][4].
 
-[Mustache][2] is also another favorite of mine; a really great and simple
-templating system. I have been slowly converting all my old views in various
-projects over to it.
+[Mustache][2] is a really great and simple templating system.
 
-Why?
+Without extra view classes
 ====
 
-There is already an [official][3] way to get Mustache to work with Sinatra, which
-involves some work and requires separate view classes to accompany your
-mustache templates. While I see the power in that it seems a bit complex..
+There is already an [official][3] way to get Mustache to work with Sinatra, which involves some work and requires separate view classes to accompany your mustache templates. There's power in that for sure, but for some implementations it is a bit complex.
 
 Usage
 =====
@@ -28,10 +24,9 @@ Try this on:
       set :views, 'templates' # totally optional
     end
 
-And then put your .mustache files in your app's views folder
+And then put your .mustache files in your app's views folder.
 
-Instance variables and locals are available to the template as well as yaml
-front matter.
+Instance variables and locals are available to the template as well as YAML front matter.
 
 Helpers
 ======
@@ -79,8 +74,7 @@ Passing arguments to helper methods via dot notation is limited to Strings only.
 Caveat
 ======
 
-If you need the extra support of the ruby views used in the official Mustache
-for Sinatra example this gem probably isn't for you.
+If you need the extra support of the ruby views used in the official Mustache for Sinatra example this gem probably isn't for you.
 
 [1]: http://www.sinatrarb.com/
 [2]: http://mustache.github.com/

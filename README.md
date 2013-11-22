@@ -1,7 +1,7 @@
 sinatra-mustache [![Build Status](https://travis-ci.org/beatrichartz/sinatra-mustache.png?branch=master)](https://travis-ci.org/beatrichartz/sinatra-mustache) [![Code Climate](https://codeclimate.com/github/beatrichartz/sinatra-mustache.png)](https://codeclimate.com/github/beatrichartz/sinatra-mustache) [![Dependency Status](https://gemnasium.com/beatrichartz/sinatra-mustache.png)](https://gemnasium.com/beatrichartz/sinatra-mustache)
 ================
 
-To simplify setting up [Sinatra][1] to use [Mustache][2] for it's templates
+To simplify setting up [Sinatra][1] to use [Mustache][2] for it's templates. Supports MRI 1.9, 2.0 as well as Rubinius and JRuby in 1.9 and 2.0 mode.
 
 [Sinatra][1] is a amazing little web framework, if you don't know much
 about it you should take some time to [get to know it][4].

@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.licenses      = ["MIT"]
   s.require_paths = ["lib"]
+  s.extensions    = 'ext/mkrf_conf.rb'
 
   s.add_dependency 'sinatra', '~> 1.3', '~> 1.4'
   s.add_dependency 'mustache', '~> 0.99'
@@ -25,4 +26,8 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 2'
   s.add_development_dependency 'rack-test', '~> 0'
+  
+  if 'rbx' == RUBY_ENGINE
+    s.add_development_dependency 'rubysl-logger'
+  end
 end

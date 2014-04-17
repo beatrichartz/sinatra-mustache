@@ -16,9 +16,9 @@ describe 'sinatra-mustache', :type => :request do
     describe "two requests" do
       it "does not cache wrong" do
         get '/foo'
-        response.body.should == 'Hello from foo!'
+        expect(response.body).to eq('Hello from foo!')
         get '/bar'
-        response.body.should == 'Hello from bar!'
+        expect(response.body).to eq('Hello from bar!')
       end
     end
   end
@@ -51,7 +51,7 @@ describe 'sinatra-mustache', :type => :request do
     end
     it "should include them and make them usable" do
       get '/foo'
-      response.body.should == "Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer"
+      expect(response.body).to eq("Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer")
     end
   end
   
@@ -70,7 +70,7 @@ describe 'sinatra-mustache', :type => :request do
     end
     it "should include them and make them usable" do
       get '/foo'
-      response.body.should == "Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer"
+      expect(response.body).to eq("Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer")
     end
   end
 
@@ -79,7 +79,11 @@ describe 'sinatra-mustache', :type => :request do
       before(:each) { mustache_app { mustache('Hello') } }
 
       it { should be_ok }
-      its(:body) { should == 'Hello' }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == 'Hello' }
+      end
     end
 
     context 'with :locals option' do
@@ -89,7 +93,11 @@ describe 'sinatra-mustache', :type => :request do
       end
 
       it { should be_ok }
-      its(:body) { should == 'Hello World!' }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == 'Hello World!' }
+      end
     end
 
     context 'with an inline layout' do
@@ -103,7 +111,11 @@ describe 'sinatra-mustache', :type => :request do
       end
 
       it { should be_ok }
-      its(:body) { should == 'This is a layout!' }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == 'This is a layout!' }
+      end
     end
 
     context 'with a file layout' do
@@ -112,7 +124,11 @@ describe 'sinatra-mustache', :type => :request do
       end
 
       it { should be_ok }
-      its(:body) { should == "From a layout!\nHello World!\n" }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == "From a layout!\nHello World!\n" }
+      end
     end
   end
 
@@ -121,21 +137,33 @@ describe 'sinatra-mustache', :type => :request do
       before(:each) { mustache_app { mustache :hello } }
 
       it { should be_ok }
-      its(:body) { should == "Hello \n" }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == "Hello \n" }
+      end
     end
 
     context 'that calls a partial' do
       before(:each) { mustache_app { mustache :needs_partial } }
 
       it { should be_ok }
-      its(:body) { should == "Hello\nfrom a partial\n" }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == "Hello\nfrom a partial\n" }
+      end
     end
 
     context 'that has yaml front matter' do
       before(:each) { mustache_app { mustache :yaml } }
 
       it { should be_ok }
-      its(:body) { should == "Hello\nfrom yaml\n" }
+
+      describe '#body' do
+        subject { super().body }
+        it { should == "Hello\nfrom yaml\n" }
+      end
     end
   end
 end

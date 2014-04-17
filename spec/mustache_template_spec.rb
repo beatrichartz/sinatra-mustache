@@ -83,12 +83,12 @@ describe Tilt::MustacheTemplate do
       subject { template.render(scope, locals) }
 
       it 'locals should have precedence' do
-        subject.should == 'Beer is great but Whisky is greater.'
+        expect(subject).to eq('Beer is great but Whisky is greater.')
       end
       context "with locals evaluating to false" do
         let(:locals) { { :beer => 'great', :whisky => nil } }
         it 'locals should still have precedence' do
-          subject.should == 'Beer is great but Whisky is .'
+          expect(subject).to eq('Beer is great but Whisky is .')
         end
       end
     end
@@ -107,8 +107,8 @@ describe Tilt::MustacheTemplate do
       end
       subject { template.render(scope, data) }
       it "should not be modified through rendering" do
-        subject.should == "The best beer is Gulp. The second best beer is German Schluck.  The worst Whisky is Rotten Brew. The best Whisky is Barley Pure. "
-        data.keys.map(&:to_s).sort.should == %W(beers whiskies)
+        expect(subject).to eq("The best beer is Gulp. The second best beer is German Schluck.  The worst Whisky is Rotten Brew. The best Whisky is Barley Pure. ")
+        expect(data.keys.map(&:to_s).sort).to eq(%W(beers whiskies))
       end
     end
     
@@ -125,14 +125,14 @@ describe Tilt::MustacheTemplate do
         let(:first_locals) { { :beer => 'great', :whisky => 'greater' } }
         subject { @template.render(Object.new, first_locals) }
         it 'should render fine' do
-          subject.should == 'Beer is great but Whisky is greater.'
+          expect(subject).to eq('Beer is great but Whisky is greater.')
         end
       end
       context "second time rendering with changed locals" do
         let(:second_locals) { { :beer => 'nice', :whisky => 'the best' } }
         subject { @template.render(Object.new, second_locals) }
         it 'should render fine' do
-          subject.should == 'Beer is nice but Whisky is the best.'
+          expect(subject).to eq('Beer is nice but Whisky is the best.')
         end
       end
     end

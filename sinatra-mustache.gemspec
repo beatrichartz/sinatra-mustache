@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.extensions    = 'ext/mkrf_conf.rb'
 
   s.add_dependency 'sinatra', '~> 1.3', '~> 1.4'
-  s.add_dependency 'mustache', '~> 0.99'
+  s.add_dependency 'mustache', '~> 0.99.6'
   s.add_dependency 'tilt', '>= 1.3', '<= 2.0'
 
   s.add_development_dependency 'rspec', '~> 2'

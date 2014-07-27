@@ -4,8 +4,8 @@ describe Tilt::MustacheTemplate do
   describe 'registered for mustache files' do
     subject { Tilt::MustacheTemplate }
 
-    it { should == Tilt['test.mustache'] }
-    it { should == Tilt['test.html.mustache'] }
+    it { is_expected.to eq(Tilt['test.mustache']) }
+    it { is_expected.to eq(Tilt['test.html.mustache']) }
   end
 
   describe '#render' do
@@ -14,13 +14,13 @@ describe Tilt::MustacheTemplate do
     context 'without locals or a scope' do
       subject { template.render }
 
-      it { should == 'Hello !' }
+      it { is_expected.to eq('Hello !') }
     end
 
     context 'with locals' do
       subject { template.render(Object.new, :someone => 'World') }
 
-      it { should == 'Hello World!' }
+      it { is_expected.to eq('Hello World!') }
     end
 
     context 'with an objects scope' do
@@ -32,7 +32,7 @@ describe Tilt::MustacheTemplate do
 
       subject { template.render(scope) }
 
-      it { should == 'Hello World!' }
+      it { is_expected.to eq('Hello World!') }
     end
 
     context 'methods of the scope' do
@@ -41,7 +41,7 @@ describe Tilt::MustacheTemplate do
           'Hello, I am {{ name.Moto.Tantra }} and these are my friends {{ friends.Hazy.Lazy.Crazy }}! Come and join us for a {{ sour_drink.Whiskey }} or just a {{ random_drink }}'
         end
       end
-      
+
       let(:scope) do
         scope = Object.new
         def scope.name first_name, last_name
@@ -58,10 +58,10 @@ describe Tilt::MustacheTemplate do
         end
         scope
       end
-      
+
       subject { template.render(scope) }
 
-      it { should == "Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer" }
+      it { is_expected.to eq("Hello, I am Moto Tantra and these are my friends Hazy &amp; Lazy &amp; Crazy! Come and join us for a Whiskey Sour or just a Beer") }
     end
 
     context 'with both an object and locals' do
@@ -92,7 +92,7 @@ describe Tilt::MustacheTemplate do
         end
       end
     end
-    
+
     context "data" do
       let(:template) do
         Tilt::MustacheTemplate.new {
@@ -111,26 +111,23 @@ describe Tilt::MustacheTemplate do
         expect(data.keys.map(&:to_s).sort).to eq(%W(beers whiskies))
       end
     end
-    
+
     context "when locals are changing for the same template" do
       let(:template) {
         Tilt::MustacheTemplate.new {
           'Beer is {{ beer }} but Whisky is {{ whisky }}.'
         }
       }
-      before(:all) do
-        @template = template
-      end
       context "first time rendering" do
         let(:first_locals) { { :beer => 'great', :whisky => 'greater' } }
-        subject { @template.render(Object.new, first_locals) }
+        subject { template.render(Object.new, first_locals) }
         it 'should render fine' do
           expect(subject).to eq('Beer is great but Whisky is greater.')
         end
       end
       context "second time rendering with changed locals" do
         let(:second_locals) { { :beer => 'nice', :whisky => 'the best' } }
-        subject { @template.render(Object.new, second_locals) }
+        subject { template.render(Object.new, second_locals) }
         it 'should render fine' do
           expect(subject).to eq('Beer is nice but Whisky is the best.')
         end
@@ -141,7 +138,7 @@ describe Tilt::MustacheTemplate do
       let(:template) { Tilt::MustacheTemplate.new { |t| 'Hello {{ yield }}!'} }
       subject { template.render { 'World' } }
 
-      it { should == 'Hello World!' }
+      it { is_expected.to eq('Hello World!') }
     end
 
     context 'with a template that has yaml front matter' do
@@ -153,7 +150,7 @@ describe Tilt::MustacheTemplate do
 
       subject { template.render }
 
-      it { should == "Hello\nfrom yaml\n" }
+      it { is_expected.to eq("Hello\nfrom yaml\n") }
     end
   end
 end

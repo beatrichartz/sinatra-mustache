@@ -78,11 +78,11 @@ describe 'sinatra-mustache', :type => :request do
     context 'without the :locals option' do
       before(:each) { mustache_app { mustache('Hello') } }
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == 'Hello' }
+        it { is_expected.to eq('Hello') }
       end
     end
 
@@ -92,11 +92,11 @@ describe 'sinatra-mustache', :type => :request do
         mustache_app { mustache('Hello {{ subject }}!', :locals => locals) }
       end
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == 'Hello World!' }
+        it { is_expected.to eq('Hello World!') }
       end
     end
 
@@ -110,11 +110,11 @@ describe 'sinatra-mustache', :type => :request do
         get '/'
       end
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == 'This is a layout!' }
+        it { is_expected.to eq('This is a layout!') }
       end
     end
 
@@ -123,11 +123,11 @@ describe 'sinatra-mustache', :type => :request do
         mustache_app { mustache('Hello World!', :layout => :layout_too) }
       end
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == "From a layout!\nHello World!\n" }
+        it { is_expected.to eq("From a layout!\nHello World!\n") }
       end
     end
   end
@@ -136,33 +136,33 @@ describe 'sinatra-mustache', :type => :request do
     context 'without a layout' do
       before(:each) { mustache_app { mustache :hello } }
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == "Hello \n" }
+        it { is_expected.to eq("Hello \n") }
       end
     end
 
     context 'that calls a partial' do
       before(:each) { mustache_app { mustache :needs_partial } }
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == "Hello\nfrom a partial\n" }
+        it { is_expected.to eq("Hello\nfrom a partial\n") }
       end
     end
 
     context 'that has yaml front matter' do
       before(:each) { mustache_app { mustache :yaml } }
 
-      it { should be_ok }
+      it { is_expected.to be_ok }
 
       describe '#body' do
         subject { super().body }
-        it { should == "Hello\nfrom yaml\n" }
+        it { is_expected.to eq("Hello\nfrom yaml\n") }
       end
     end
   end
